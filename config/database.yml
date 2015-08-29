@@ -1,0 +1,19 @@
+development: &default
+  adapter: postgresql
+  database: interia_authentication
+  encoding: utf8
+  # host: postgres_database
+  host: localhost
+  min_messages: warning
+  pool: 2
+  timeout: 5000
+  username: postgres
+  password: password
+
+test:
+  <<: *default
+  database: interia_authentication_test
+
+production:
+  <<: *default
+  database: interia_authentication
