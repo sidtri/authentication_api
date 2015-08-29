@@ -1,28 +1,14 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Authentication Api
 
-Things you may want to cover:
+Create users
+`User.create(:email => 'sample@mail.com', password: 'password')
 
-* Ruby version
+##### Assign Token
 
-* System dependencies
+HTTParty.post("#{Figaro.env.auth_base_url}/sessions.json", {body: '{ "user": { "email": "sample@mail.com", "password": "password" } }',headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}})
 
-* Configuration
+##### Validate Token
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+HTTParty.get("#{Figaro.env.auth_base_url}/admin.json", {headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json', 'X-User-Email' => 'sample@mail.com', 'X-Auth-Token' => '......@token'}})
