@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    TokenIssuer.expire_token(current_user, request) if current_user
+    TokenIssuer.expire_token(User.find_by_email(params[:user][:email]), request) if current_user
     render status: :ok, json: ""
   end
 
